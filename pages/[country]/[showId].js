@@ -1,25 +1,28 @@
 import parse from "html-react-parser";
 import axios from "axios";
 import Cast from "../../components/Cast";
+import Layout from "../../components/Layout";
 
 export default function ShowId({ show }) {
   return (
-    <div className="show-details">
-      <div
-        className="show-details__poster"
-        style={{ backgroundImage: `url(${show.image?.original})` }}
-      />
-      <h3>{show.name}</h3>
-      {parse(show.summary)}
-      {show._embedded.cast.length > 0 && <Cast cast={show._embedded.cast} />}
-      <style jsx>{`
-        .show-details__poster {
-          height: 200px;
-          background-repeat: no-repeat;
-          background-size: cover;
-        }
-      `}</style>
-    </div>
+    <Layout>
+      <div className="show-details">
+        <div
+          className="show-details__poster"
+          style={{ backgroundImage: `url(${show.image?.original})` }}
+        />
+        <h3>{show.name}</h3>
+        {parse(show.summary)}
+        {show._embedded.cast.length > 0 && <Cast cast={show._embedded.cast} />}
+        <style jsx>{`
+          .show-details__poster {
+            height: 200px;
+            background-repeat: no-repeat;
+            background-size: cover;
+          }
+        `}</style>
+      </div>
+    </Layout>
   );
 }
 
