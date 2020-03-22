@@ -1,18 +1,17 @@
 import axios from "axios";
+import Thumbnail from "../../components/Thumbnail";
 
 export default function Country({ shows }) {
   const renderShows = () => {
-    return shows.map((_show, index) => {
-      const { show } = _show;
-      return <li key={index}>{show.name}</li>;
-    });
+    return shows.map((_show, index) => <Thumbnail {..._show} key={index} />);
   };
   return <ul>{renderShows()}</ul>;
 }
 
-Country.getInitialProps = async props => {
+Country.getInitialProps = async context => {
+  const country = context.query.country || "US";
   const response = await axios.get(
-    "http://api.tvmaze.com/schedule?country=US&date=2014-12-01"
+    `http://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`
   );
   return {
     shows: response.data
