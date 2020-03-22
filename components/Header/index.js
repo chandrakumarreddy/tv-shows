@@ -5,7 +5,10 @@ import countries from "../../utils/codes";
 export default function Header() {
   const router = useRouter();
   const [country, setCountry] = React.useState(router.query.country);
-  const handleSelect = e => setCountry(e.target.value);
+  const handleSelect = e => {
+    setCountry(e.target.value);
+    router.push("/[country]", `/${e.target.value}`);
+  };
   const options = () => {
     return countries.map(_country => (
       <option value={_country.code} key={_country.code}>
