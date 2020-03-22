@@ -30,6 +30,7 @@ export default function Header() {
           color: #fff;
           padding: 20px;
           text-align: center;
+          margin-bottom: 10px;
         }
       `}</style>
     </div>

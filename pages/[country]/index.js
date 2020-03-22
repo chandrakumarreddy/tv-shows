@@ -4,9 +4,8 @@ import Thumbnail from "../../components/Thumbnail";
 export default function Country({ shows, country }) {
   const renderShows = () => {
     return shows.map((_show, index) => (
-      <li>
+      <li key={index}>
         <Thumbnail
-          key={index}
           as={`/${country}/${_show.show.id}`}
           name={_show.show.name}
           image={_show.show.image}
