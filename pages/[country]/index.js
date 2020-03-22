@@ -1,14 +1,23 @@
-import Link from "next/link";
 import axios from "axios";
 import Thumbnail from "../../components/Thumbnail";
 
-export default function Country({ shows }) {
+export default function Country({ shows, country }) {
   const renderShows = () => {
-    return shows.map((_show, index) => <Thumbnail {..._show} key={index} />);
+    return shows.map((_show, index) => (
+      <li>
+        <Thumbnail
+          key={index}
+          as={`/${country}/${_show.show.id}`}
+          name={_show.show.name}
+          image={_show.show.image}
+          href="/[country]/[showId]"
+        />
+      </li>
+    ));
   };
   return (
     <ul className="tvshows-grid">
-      {renderShows()}{" "}
+      {renderShows()}
       <style jsx>{`
         .tvshows-grid {
           list-style-type: none;
@@ -44,9 +53,10 @@ Country.getInitialProps = async context => {
     );
     shows = response.data;
   } catch (error) {
-    console.log(error.message);
+    console.log(error, "error==>");
   }
   return {
-    shows
+    shows,
+    country
   };
 };

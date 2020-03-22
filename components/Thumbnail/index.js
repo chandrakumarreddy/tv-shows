@@ -1,22 +1,37 @@
 import Link from "next/link";
-import "./style.scss";
 
-export default function Thumbnail({ show }) {
-  const { name, image } = show;
+export default function Thumbnail({
+  name,
+  image,
+  as = "",
+  href = "",
+  small = false
+}) {
   return (
-    <Link href="[country]/[showId]" as={`/us/${show.id}`}>
-      <a>
-        <div className="thumbnail">
+    <div className="thumbnail">
+      <Link href={href} as={as}>
+        <a>
           <img
             src={
               image?.medium ?? `http://via.placeholder.com/210x295?text=${name}`
             }
-            alt={show.name}
+            alt={name}
             className="thumbnail__image"
           />
           <h3 className="thumbnail__caption">{name}</h3>
-        </div>
-      </a>
-    </Link>
+        </a>
+      </Link>
+      <style jsx>{`
+        .thumbnail {
+          cursor: pointer;
+        }
+        .thumbnail__image {
+          width: ${small ? "100px" : "100%"};
+        }
+        .thumbnail__caption {
+          text-align: center;
+        }
+      `}</style>
+    </div>
   );
 }
