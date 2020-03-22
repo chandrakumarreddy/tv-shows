@@ -18,9 +18,6 @@ export default function Cast({ cast }) {
       <ul className="cast__list">{renderCast()}</ul>
       <style jsx>{`
         .cast__list {
-          padding: 0;
-          margin: 0;
-          list-style: none;
           display: flex;
           overflow-x: scroll;
         }

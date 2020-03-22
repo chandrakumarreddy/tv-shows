@@ -6,6 +6,16 @@ function MyApp({ Component, pageProps }) {
     <React.Fragment>
       <Header />
       <Component {...pageProps} />
+      <style jsx>{`
+        body {
+          margin: 0;
+        }
+        :global(ul) {
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+      `}</style>
     </React.Fragment>
   );
 }

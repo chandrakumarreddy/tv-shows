@@ -19,9 +19,6 @@ export default function Country({ shows, country }) {
       {renderShows()}
       <style jsx>{`
         .tvshows-grid {
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 10px;
@@ -32,13 +29,6 @@ export default function Country({ shows, country }) {
           }
         }
       `}</style>
-      <style jsx global>
-        {`
-          body {
-            margin: 0;
-          }
-        `}
-      </style>
     </ul>
   );
 }
