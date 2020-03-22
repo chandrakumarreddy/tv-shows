@@ -1,7 +1,9 @@
+import Error from "next/error";
 import axios from "axios";
 import Thumbnail from "../../components/Thumbnail";
 
-export default function Country({ shows, country }) {
+export default function Country({ shows, country, statusCode }) {
+  if (statusCode) return <Error statusCode={statusCode} />;
   const renderShows = () => {
     return shows.map((_show, index) => (
       <li key={index}>
@@ -34,18 +36,17 @@ export default function Country({ shows, country }) {
 }
 
 Country.getInitialProps = async context => {
-  const country = context.query.country || "US";
-  let shows = [];
   try {
+    const country = context.query.country || "US";
     const response = await axios.get(
       `http://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`
     );
-    shows = response.data;
+
+    return {
+      shows: response.data,
+      country
+    };
   } catch (error) {
-    console.log(error, "error==>");
+    return { statusCode: error.response ? error.response.status : 500 };
   }
-  return {
-    shows,
-    country
-  };
 };

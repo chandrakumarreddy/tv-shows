@@ -1,8 +1,10 @@
 import parse from "html-react-parser";
 import axios from "axios";
+import Error from "next/error";
 import Cast from "../../components/Cast";
 
-export default function ShowId({ show }) {
+export default function ShowId({ show, statusCode }) {
+  if (statusCode) return <Error statusCode={statusCode} />;
   return (
     <div className="show-details">
       <div
@@ -24,17 +26,15 @@ export default function ShowId({ show }) {
 }
 
 ShowId.getInitialProps = async context => {
-  const showId = context.query.showId;
-  let show = {};
   try {
+    const showId = context.query.showId;
     const response = await axios.get(
       `http://api.tvmaze.com/shows/${showId}?embed=cast`
     );
-    show = response.data;
+    return {
+      show: response.data
+    };
   } catch (error) {
-    console.log(error.message);
+    return { statusCode: error.response ? error.response.status : 500 };
   }
-  return {
-    show
-  };
 };

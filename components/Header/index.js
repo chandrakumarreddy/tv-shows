@@ -1,10 +1,16 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Link from "next/link";
 import countries from "../../utils/codes";
 
 export default function Header() {
   const router = useRouter();
-  const [country, setCountry] = React.useState(router.query.country);
+  const [country, setCountry] = React.useState(router.query.country ?? "");
+  React.useEffect(() => {
+    if (!router.query.country) {
+      setCountry("");
+    }
+  }, [router.pathname]);
   const handleSelect = e => {
     setCountry(e.target.value);
     router.push("/[country]", `/${e.target.value}`);
@@ -18,11 +24,20 @@ export default function Header() {
   };
   return (
     <div className="header">
-      <div>TvShows</div>
+      <div>
+        <Link href="/" as="/">
+          <a className="logo">TvShows</a>
+        </Link>
+      </div>
       <select onChange={handleSelect} value={country}>
+        <option value="">please select</option>
         {options()}
       </select>
       <style jsx>{`
+        .logo {
+          color: #fff;
+          text-decoration: none;
+        }
         .header {
           display: flex;
           justify-content: space-between;
