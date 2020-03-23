@@ -22,6 +22,7 @@ export default function Country({ shows, country, statusCode }) {
       {renderShows()}
       <style jsx>{`
         .tvshows-grid {
+          margin: 16px;
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 10px;

@@ -2,8 +2,9 @@ import parse from "html-react-parser";
 import axios from "axios";
 import Error from "next/error";
 import Cast from "../../components/Cast";
+import WithAuthorization from "../../helpers/withAuthorization";
 
-export default function ShowId({ show, statusCode }) {
+function ShowId({ show, statusCode }) {
   if (statusCode) return <Error statusCode={statusCode} />;
   return (
     <div className="show-details">
@@ -15,6 +16,9 @@ export default function ShowId({ show, statusCode }) {
       {parse(show.summary)}
       {show._embedded.cast.length > 0 && <Cast cast={show._embedded.cast} />}
       <style jsx>{`
+        .show-details {
+          margin: 16px;
+        }
         .show-details__poster {
           height: 200px;
           background-repeat: no-repeat;
@@ -35,6 +39,9 @@ ShowId.getInitialProps = async context => {
       show: response.data
     };
   } catch (error) {
+    console.log(error);
     return { statusCode: error.response ? error.response.status : 500 };
   }
 };
+
+export default WithAuthorization(ShowId);

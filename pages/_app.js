@@ -17,6 +17,33 @@ function MyApp({ Component, pageProps }) {
           margin: 0;
           list-style: none;
         }
+        :global(form) {
+          margin: 10px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        :global(input) {
+          width: 100%;
+          margin-top: 10px;
+          padding: 10px;
+          box-sizing: border-box;
+        }
+        :global(button) {
+          padding: 10px;
+          background-color: blue;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+        :global(.error) {
+          color: red;
+        }
+        :global(.disabled) {
+          cursor: not-allowed;
+          background-color: gray;
+        }
       `}</style>
     </React.Fragment>
   );
