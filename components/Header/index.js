@@ -1,6 +1,5 @@
 import React from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import countries from "../../utils/codes";
 
 export default function Header() {
@@ -24,11 +23,7 @@ export default function Header() {
   };
   return (
     <div className="header">
-      <div>
-        <Link href="/" as="/">
-          <a className="logo">TvShows</a>
-        </Link>
-      </div>
+      <div>TvShows</div>
       <select onChange={handleSelect} value={country}>
         <option value="">please select</option>
         {options()}
