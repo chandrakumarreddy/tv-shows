@@ -31,7 +31,9 @@ export default function Header() {
   }, [country]);
   return (
     <div className="header">
-      <div>TvShows</div>
+      <div>
+        <img src="/images/logo.png" alt="logo" width="100" height="20" />
+      </div>
       <select onChange={handleSelect} value={country}>
         <option value="">please select</option>
         {options()}
