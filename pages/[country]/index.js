@@ -1,5 +1,6 @@
 import Error from "next/error";
 import axios from "axios";
+import nookies from "nookies";
 import Thumbnail from "../../components/Thumbnail";
 
 export default function Country({ shows, country, statusCode }) {
@@ -37,7 +38,8 @@ export default function Country({ shows, country, statusCode }) {
 
 Country.getInitialProps = async context => {
   try {
-    const country = context.query.country || "US";
+    const country =
+      context.query.country || nookies.get(context).defaultCountry || "US";
     const response = await axios.get(
       `https://api.tvmaze.com/schedule?country=${country}&date=2014-12-01`
     );

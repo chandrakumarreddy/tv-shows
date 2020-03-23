@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import nookies from "nookies";
 import countries from "../../utils/codes";
 
 export default function Header() {
@@ -21,6 +22,13 @@ export default function Header() {
       </option>
     ));
   };
+  React.useEffect(() => {
+    nookies.set(null, "defaultCountry", country),
+      {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/"
+      };
+  }, [country]);
   return (
     <div className="header">
       <div>TvShows</div>
