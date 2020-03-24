@@ -7,6 +7,8 @@ export default function Cast({ cast }) {
         <Thumbnail
           name={_cast?.person?.name}
           image={_cast?.person?.image}
+          href={`/cast?personId=${_cast?.person?.id}`}
+          as={`/cast/${_cast?.person?.id}`}
           small
         />
       </li>
