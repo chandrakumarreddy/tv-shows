@@ -2,14 +2,15 @@ import React from "react";
 import axios from "axios";
 import nookies from "nookies";
 import Link from "next/link";
-import { SIGNIN } from "../utils/urls";
+import { SIGNUP } from "../utils/urls";
 import TextField from "../components/TextField";
 import { isEmail, isRequired } from "../utils/validators";
 import { useRouter } from "next/router";
 
 const initialValue = {
   email: "",
-  password: ""
+  password: "",
+  name: ""
 };
 
 export default function Signin() {
@@ -23,7 +24,7 @@ export default function Signin() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post(SIGNIN, { ...initialState });
+      const response = await axios.post(SIGNUP, { ...initialState });
       nookies.set(null, "token", response.data.token, {
         path: "/"
       });
@@ -32,12 +33,21 @@ export default function Signin() {
       setError(error.response?.data?.message ?? "Something went wrong");
     }
   };
-  const { email, password } = initialState;
+  const { email, password, name } = initialState;
   return (
     <form onSubmit={handleSubmit}>
       {error && typeof error !== "boolean" && (
         <div className="error">{error}</div>
       )}
+      <TextField
+        type="text"
+        name="name"
+        value={name}
+        onBlur={isRequired}
+        onChange={handleChange}
+        onError={setError}
+        placeholder="Please enter Name"
+      />
       <TextField
         type="text"
         name="email"
@@ -63,19 +73,16 @@ export default function Signin() {
       >
         Submit
       </button>
-      <div className="signin__otheroptions">
-        <Link href="/signup">
-          <a>Create account here</a>
-        </Link>
-        <Link href="/forgotPassword">
-          <a>Forgot Password</a>
+      <div className="signup__otheroptions">
+        <Link href="/signin">
+          <a>Already have an Account? Login here</a>
         </Link>
       </div>
       <style jsx>
         {`
-          .signin__otheroptions {
+          .signup__otheroptions {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
           }
         `}

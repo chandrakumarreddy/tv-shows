@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }) {
           color: #fff;
           border: none;
           cursor: pointer;
-          margin-top: 10px;
+          margin: 10px 0;
         }
         :global(.error) {
           color: red;

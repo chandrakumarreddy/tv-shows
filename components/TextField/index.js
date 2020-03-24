@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Input(props) {
-  const { name, value, onChange, onBlur } = props;
+  const { name, value, onChange, onBlur, type = "text" } = props;
   const [error, setError] = React.useState("");
   const handleBlur = () => {
     const isValid = onBlur?.(value);
@@ -16,6 +16,7 @@ export default function Input(props) {
     <div>
       <input
         {...props}
+        type={type}
         autoComplete="off"
         name={name}
         value={value}
