@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import nookies from "nookies";
 import countries from "../../utils/codes";
@@ -32,7 +33,11 @@ export default function Header() {
   return (
     <div className="header">
       <div>
-        <img src="/images/logo.png" alt="logo" width="100" height="20" />
+        <Link href="/" as="/">
+          <a>
+            <img src="/images/logo.png" alt="logo" width="100" height="20" />
+          </a>
+        </Link>
       </div>
       <select onChange={handleSelect} value={country}>
         <option value="">please select</option>

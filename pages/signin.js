@@ -26,7 +26,7 @@ export default function Signin() {
       nookies.set(null, "token", response.token, {
         path: "/"
       });
-      router.replace("/[country]", "us");
+      router.replace("/[country]", "/us");
     } catch (error) {
       setError(error.response?.data?.message ?? "Something went wrong");
     }

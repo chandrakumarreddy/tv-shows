@@ -8,11 +8,11 @@ function Home() {
 Home.getInitialProps = context => {
   const country =
     context.query.country || nookies.get(context).defaultCountry || "us";
-  process.browser
-    ? Router.replace("/[country]", `${country}`)
-    : context.res.writeHead(302, { Location: `/${country}` });
-
-  context.res.end();
+  if (process.browser) return Router.replace("/[country]", `/${country}`);
+  else {
+    context.res.writeHead(302, { Location: `/${country}` });
+    return context.res.end();
+  }
 };
 
 export default Home;
