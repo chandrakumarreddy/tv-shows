@@ -27,7 +27,9 @@ export default function Signin() {
       nookies.set(null, "token", response.data.token, {
         path: "/"
       });
-      router.replace("/[country]", "/us");
+      const { prevPath } = nookies.get();
+      const { href = "/[country", as = "/us" } = JSON.parse(prevPath);
+      router.replace(href, as);
     } catch (error) {
       setError(error.response?.data?.message ?? "Something went wrong");
     }

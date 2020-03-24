@@ -4,6 +4,12 @@ import Router from "next/router";
 
 const authenticate = context => {
   const { token } = nookies.get(context);
+  nookies.set(
+    context,
+    "prevPath",
+    JSON.stringify({ as: context.asPath, href: context.pathname }),
+    { path: "/" }
+  );
   if (context.req && !token) {
     context.res.writeHead(302, { Location: "/signin" });
     context.res.end();

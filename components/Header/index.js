@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import nookies from "nookies";
+import isAuthenticated from "../../helpers/isAuthenticated";
 import countries from "../../utils/codes";
 
 export default function Header() {
@@ -19,12 +20,17 @@ export default function Header() {
       </option>
     ));
   };
+  const handleSignout = () => {
+    nookies.destroy(null, "token");
+  };
   React.useEffect(() => {
-    nookies.set(null, "defaultCountry", country),
-      {
-        maxAge: 30 * 24 * 60 * 60,
-        path: "/"
-      };
+    if (country) {
+      nookies.set(null, "defaultCountry", country),
+        {
+          maxAge: 30 * 24 * 60 * 60,
+          path: "/"
+        };
+    }
   }, [country]);
   return (
     <div className="header">
@@ -39,6 +45,13 @@ export default function Header() {
         <option value="">please select</option>
         {options()}
       </select>
+      {isAuthenticated() && (
+        <Link href="/[country]" as={`/${country}`}>
+          <a className="logout" onClick={handleSignout}>
+            Logout
+          </a>
+        </Link>
+      )}
       <style jsx>{`
         .logo {
           color: #fff;
@@ -52,6 +65,10 @@ export default function Header() {
           padding: 20px;
           text-align: center;
           margin-bottom: 10px;
+        }
+        .logout {
+          color: #fff;
+          text-decoration: none;
         }
       `}</style>
     </div>
