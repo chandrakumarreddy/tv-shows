@@ -57,8 +57,8 @@ export default function Signin() {
       />
       <button
         type="submit"
-        className={`button ${!email || !password || error ? "disabled" : ""}`}
-        disabled={!email || !password || error}
+        className={`button ${!email || !password ? "disabled" : ""}`}
+        disabled={!email || !password}
       >
         Submit
       </button>
