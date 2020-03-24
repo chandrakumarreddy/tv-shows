@@ -23,7 +23,7 @@ export default function Signin() {
     e.preventDefault();
     try {
       const response = await axios.post(SIGNIN, { ...initialState });
-      nookies.set(null, "token", response.token, {
+      nookies.set(null, "token", response.data.token, {
         path: "/"
       });
       router.replace("/[country]", "/us");

@@ -7,11 +7,7 @@ import countries from "../../utils/codes";
 export default function Header() {
   const router = useRouter();
   const [country, setCountry] = React.useState(router.query.country ?? "");
-  React.useEffect(() => {
-    if (!router.query.country) {
-      setCountry("");
-    }
-  }, [router.pathname]);
+
   const handleSelect = e => {
     setCountry(e.target.value);
     router.push("/[country]", `/${e.target.value}`);
